@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ErrorLoggerSM.Domain.Entities;
-public class SeverityLevel : BaseEntity
+public class ErrorComments
 {
-    public required string Name { get; set; }
-
-    public required string Level { get; set; }
+   
+    public required string Comment { get; set; }
 }

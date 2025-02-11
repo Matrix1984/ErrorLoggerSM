@@ -1,5 +1,5 @@
 ﻿namespace ErrorLoggerSM.Domain.Entities;
-public class ErrorEntities : BaseEntity
+public class TargetSystem : BaseEntity
 {
     public required string Name { get; set; }
 }
