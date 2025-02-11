@@ -13,6 +13,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<TodoList> TodoLists => Set<TodoList>();
 
+    public DbSet<Alert> Alerts => Set<Alert>();
+
+    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
+
+    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
+
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 
     protected override void OnModelCreating(ModelBuilder builder)
