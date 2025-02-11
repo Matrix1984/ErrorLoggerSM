@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ErrorLoggerSM.Infrastructure.Data.Configurations;
-public class ErrorTagConfiguration : IEntityTypeConfiguration<ErrorTag>
+public class LogSmEventSmConfiguration : IEntityTypeConfiguration<LogSmEvent>
 {
-    public void Configure(EntityTypeBuilder<ErrorTag> builder)
+    public void Configure(EntityTypeBuilder<LogSmEvent> builder)
     {
-        builder.Property(t => t.AppId)
+        builder.Property(t => t.Name)
         .HasMaxLength(100);
     }
 }
