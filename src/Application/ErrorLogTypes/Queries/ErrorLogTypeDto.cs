@@ -9,4 +9,12 @@ public class ErrorLogTypeDto
     public string? Description { get; set; }
 
     public SeverityLevelDto? SeverityLevel { get; set; }
+
+    private class Mapping : Profile
+    {
+        public Mapping()
+        {
+            CreateMap<ErrorLogType, ErrorLogTypeDto>();
+        }
+    }
 }
