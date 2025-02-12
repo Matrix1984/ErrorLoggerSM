@@ -10,7 +10,7 @@ public record ErrorTagVM
 {
     public SeverityLevelDto? SeverityLevel { get; init; }
     public ErrorLogTypeDto? ErrorLogType { get; init; }
-    public TargetAppVM? TargetApp { get; init; }
+    public TargetAppDto? TargetApp { get; init; }
     public TargetSystemVM? TargetSystem { get; init; }
     public required string Name { get; init; }
     public string? Description { get; init; }

@@ -6,7 +6,7 @@ public class CreateErrorTagDto
 {
     // public CreateSeverityLevelDto? SeverityLevel { get; init; }
     //  public CreateErrorLogTypeDto? ErrorLogType { get; init; }
-    public CreateTargetAppDto? TargetApp { get; init; }
+ //   public CreateTargetAppDto? TargetApp { get; init; }
     public CreateTargetSystemDto? TargetSystem { get; init; }
     public required string Name { get; init; }
     public string? Description { get; init; }
