@@ -15,6 +15,8 @@ public class SysError : BaseAuditableEntity
     public ICollection<ErrorTag>? ErrorTags { get; set; }
 
     //Log Type
+
+    public int? ErrorLogTypeId { get; set; }
     public ErrorLogType ErrorLogType { get; set; } = null!;
 
     //Other
@@ -22,9 +24,10 @@ public class SysError : BaseAuditableEntity
     public ICollection<Comment>? ErrorComments { get; set; }
     public ICollection<PostErrorAction>? PostErrorAction { get; set; }
 
-    public ICollection<Comment>? Comments { get; set; }
-
     //References 
+    public int? TargetAppId { get; set; }
     public TargetApp? TargetApp { get; set; }
+
+    public int? TargetSystemId { get; set; }
     public TargetSystem? TargetSystem { get; set; }
 }

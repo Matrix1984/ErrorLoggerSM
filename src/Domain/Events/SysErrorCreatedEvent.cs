@@ -1,7 +1,7 @@
 ﻿namespace ErrorLoggerSM.Domain.Events;
-public class SysErrorCreatedAPIEmail : BaseEvent
+public class SysErrorCreatedEvent : BaseEvent
 {
-    public SysErrorCreatedAPIEmail(SysError item)
+    public SysErrorCreatedEvent(SysError item)
     {
         Item = item;
     }

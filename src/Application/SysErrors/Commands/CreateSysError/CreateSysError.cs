@@ -1,56 +1,78 @@
-﻿//using ErrorLoggerSM.Application.Comments.Commands.CreateComment;
-//using ErrorLoggerSM.Application.Common.Interfaces;
-//using ErrorLoggerSM.Application.ErrorLogType.Commands;
-//using ErrorLoggerSM.Application.ErrorTag.Commands;
-//using ErrorLoggerSM.Application.TargetApps.Commands;
-//using ErrorLoggerSM.Application.TargetSystems.Commands;
-//using ErrorLoggerSM.Domain.Entities;
-//using ErrorLoggerSM.Domain.Enums;
-//using ErrorLoggerSM.Domain.Events;
+﻿using ErrorLoggerSM.Application.Common.Interfaces;
+using ErrorLoggerSM.Domain.Entities;
+using ErrorLoggerSM.Domain.Events;
 
-//namespace ErrorLoggerSM.Application.SysErrors.Commands.CreateSysError;
+namespace ErrorLoggerSM.Application.SysErrors.Commands.CreateSysError;
 
-//public record CreateSysErrorCommand : IRequest<int>
-//{
-//    public int? TargetHttpErrorCode { get; init; }
-//    public string? TargetAppErrorCode { get; init; }
-//    public string? TargetShortDescription { get; init; }
-//    public string? TargetLongDescription { get; init; }
-//    public string? TargetTechnicalDescription { get; init; }
-//    public string? AppId { get; init; }
-//  //  public IReadOnlyCollection<CreateErrorTagDto>? ErrorTags { get; init; }
-// //   public CreateErrorLogTypeDto? ErrorLogType { get; init; }
-//    public DateTimeOffset? ErrorGeneratedDateTime { get; init; }
-//    public IReadOnlyCollection<CreateCommentDto>? ErrorComments { get; init; } 
-//    public IReadOnlyCollection<PostErrorAction>? PostErrorAction { get; init; } 
-//    public CreateTargetAppDto? TargetApp { get; init; } 
-//    public CreateTargetSystemDto? TargetSystem { get; init; }  
-//}
+public record CreateSysErrorCommand : IRequest<int>
+{
+    public int? TargetHttpErrorCode { get; set; }
+    public string? TargetAppErrorCode { get; set; }
+    public string? TargetShortDescription { get; set; }
+    public string? TargetLongDescription { get; set; }
+    public string? TargetTechnicalDescription { get; set; }
+    public string? AppId { get; set; }
+    public int? ErrorLogTypeId { get; set; }
+    public ICollection<string>? ErrorTags { get; set; }
+    public DateTimeOffset? ErrorGeneratedDateTime { get; set; }
+    public ICollection<int>? PostErrorActions { get; set; }
+    public int? TargetAppId { get; set; }
+    public int? TargetSystemId { get; set; }
+}
 
-//public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorCommand, int>
-//{
-//    private readonly IApplicationDbContext _context;
+public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorCommand, int>
+{
+    private readonly IApplicationDbContext _context;
 
-//    public CreateTodoItemCommandHandler(IApplicationDbContext context)
-//    {
-//        _context = context;
-//    }
+    public CreateTodoItemCommandHandler(IApplicationDbContext context)
+    {
+        _context = context;
+    }
 
-//    public async Task<int> Handle(CreateSysErrorCommand request, CancellationToken cancellationToken)
-//    {
-//        var entity = new TodoItem
-//        {
-//            ListId = request.ListId,
-//            Title = request.Title,
-//            Done = false
-//        };
-         
-//        entity.AddDomainEvent(new TodoItemCreatedEvent(entity));
+    public async Task<int> Handle(CreateSysErrorCommand request, CancellationToken cancellationToken)
+    {
+        var entity = new SysError();
 
-//        _context.TodoItems.Add(entity);
+        entity.TargetHttpErrorCode = request.TargetHttpErrorCode;
 
-//        await _context.SaveChangesAsync(cancellationToken);
+        entity.TargetAppErrorCode = request.TargetAppErrorCode;
 
-//        return entity.Id;
-//    }
-//}
+        entity.TargetShortDescription = request.TargetShortDescription;
+
+        entity.TargetLongDescription = request.TargetLongDescription;
+
+        entity.TargetTechnicalDescription = request.TargetTechnicalDescription;
+
+        entity.AppId = request.AppId;
+
+        entity.ErrorLogTypeId = request.ErrorLogTypeId;
+
+        entity.ErrorGeneratedDateTime = request.ErrorGeneratedDateTime;
+
+        entity.TargetAppId = request.TargetAppId;
+
+        entity.TargetSystemId = request.TargetSystemId;
+
+        if (request.PostErrorActions != null)
+            foreach (var item in request.PostErrorActions)
+            {
+                if (item == 0)
+                    entity.AddDomainEvent(new SysErrorCreatedAPIEmailEvent(entity));
+
+                if (item == 1)
+                    entity.AddDomainEvent(new SysErrorCreatedEvent(entity));
+
+                if (item == 2)
+                    entity.AddDomainEvent(new SysErrorCreatedAPICallEvent(entity));
+            }
+
+        if (request.ErrorTags != null)
+            entity.ErrorTags = await _context.ErrorTags.Where(s => request.ErrorTags.Contains(s.Name)).ToListAsync(cancellationToken);
+
+        _context.SysErrors.Add(entity);
+
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return entity.Id;
+    }
+}
