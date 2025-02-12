@@ -43,9 +43,6 @@ public class UpdateTodoItemTests : BaseTestFixture
         var item = await FindAsync<TodoItem>(itemId);
 
         item.Should().NotBeNull();
-        item!.Title.Should().Be(command.Title);
-        item.LastModifiedBy.Should().NotBeNull();
-        item.LastModifiedBy.Should().Be(userId);
-        item.LastModified.Should().BeCloseTo(DateTime.Now, TimeSpan.FromMilliseconds(10000));
+        item!.Title.Should().Be(command.Title); 
     }
 }

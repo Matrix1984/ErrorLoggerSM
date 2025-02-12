@@ -10,5 +10,5 @@ public class ErrorTag : BaseEntity
     public required string Name { get; set; }
     public string? Description { get; set; }  
     public string? AppId { get; set; } 
-    public List<ErrorEntities>? ErrorEntities { get; set; } // User, manager, operator who caused the action to create the error.
+    public List<ErrorEntity>? ErrorEntities { get; set; } // User, manager, operator who caused the action to create the error.
 }

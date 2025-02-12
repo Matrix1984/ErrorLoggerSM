@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ErrorLoggerSM.Domain.Entities;
 public class PostErrorActionApiCallConfiguration : BaseEntity
 {
-    public string? FullPath { get; set; }
+    public required string FullPath { get; set; }
 
-    public string? Message { get; set; }
+    public required string Message { get; set; }
 }

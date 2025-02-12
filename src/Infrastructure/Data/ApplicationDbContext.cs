@@ -11,19 +11,36 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-    public DbSet<TodoList> TodoLists => Set<TodoList>();
+    public DbSet<TodoList> TodoLists => Set<TodoList>(); 
 
-    public DbSet<Alert> Alerts => Set<Alert>();
-
-    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
+    public DbSet<Comment> ErrorComments => Set<Comment>(); 
 
     public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 
-    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
+    public DbSet<ErrorEntity> ErrorEntities => Set<ErrorEntity>();
+
+    public DbSet<ErrorLogType> ErrorLogTypes => Set<ErrorLogType>();
+
+    public DbSet<ErrorTag> ErrorTags => Set<ErrorTag>();
+    
+    public DbSet<LogSmEvent> LogSmEvents => Set<LogSmEvent>();
+
+    public DbSet<AlertEmailReceiver> AlertEmailReceivers => Set<AlertEmailReceiver>();
+
+    public DbSet<PostErrorActionApiCallConfiguration> PostErrorActionApiCallConfiguration => Set<PostErrorActionApiCallConfiguration>();
+
+    public DbSet<SeverityLevel> SeverityLevels => Set<SeverityLevel>(); 
+
+    public DbSet<SysError> SysErrors => Set<SysError>();
+
+    public DbSet<TargetApp> TargetApps => Set<TargetApp>();
+
+    public DbSet<TargetSystem> TargetSystems => Set<TargetSystem>(); 
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
     }
 }
