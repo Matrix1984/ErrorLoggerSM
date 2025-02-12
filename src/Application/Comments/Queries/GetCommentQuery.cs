@@ -2,17 +2,13 @@
 
 namespace ErrorLoggerSM.Application.Comments.Queries;
 public record GetCommentQuery(int Id) : IRequest<CommentDto>;
-
-
 public class GetCommentQueryHandler : IRequestHandler<GetCommentQuery, CommentDto>
 {
-    private readonly IApplicationDbContext _context;
-    private readonly IMapper _mapper;
+    private readonly IApplicationDbContext _context; 
 
-    public GetCommentQueryHandler(IApplicationDbContext context, IMapper mapper)
+    public GetCommentQueryHandler(IApplicationDbContext context)
     {
-        _context = context;
-        _mapper = mapper;
+        _context = context; 
     }
 
     public async Task<CommentDto> Handle(GetCommentQuery request, CancellationToken cancellationToken)
