@@ -21,7 +21,7 @@ public class DeleteTodoListCommandHandler : IRequestHandler<DeleteSeverityLevelC
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.SeverityLevels.Remove(entity);
+        entity.IsDeleted = true;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

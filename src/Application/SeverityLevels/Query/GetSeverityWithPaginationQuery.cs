@@ -24,9 +24,9 @@ public class GetSeverityWithPaginationQueryHandler : IRequestHandler<GetSeverity
     public async Task<PaginatedList<SeverityLevelDto>> Handle(GetSeverityWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.SeverityLevels
-               .OrderBy(x => x.Id)
+               .Where(x => !x.IsDeleted)
+               .OrderByDescending(x => x.Id)
                .ProjectTo<SeverityLevelDto>(_mapper.ConfigurationProvider)
                .PaginatedListAsync(request.PageNumber, request.PageSize);
-
     }
 }
