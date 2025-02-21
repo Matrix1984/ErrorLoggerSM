@@ -31,6 +31,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<SeverityLevel> SeverityLevels => Set<SeverityLevel>(); 
 
+    public DbSet<SysEvent> SysEvents => Set<SysEvent>();
+
     public DbSet<SysError> SysErrors => Set<SysError>();
 
     public DbSet<TargetApp> TargetApps => Set<TargetApp>();

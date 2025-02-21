@@ -1,4 +1,4 @@
-﻿namespace ErrorLoggerSM.Domain.Events;
+﻿namespace ErrorLoggerSM.Domain.Events.SysErrorEvents;
 public class SysErrorCreatedAPICallEvent : BaseEvent
 {
     public SysErrorCreatedAPICallEvent(SysError item)

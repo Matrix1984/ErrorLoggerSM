@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ErrorLoggerSM.Infrastructure.Data.Configurations;
-public class SysLogConfiguration : IEntityTypeConfiguration<SysError>
+public class SysLogConfiguration : IEntityTypeConfiguration<SysEvent>
 {
-    public void Configure(EntityTypeBuilder<SysError> builder)
+    public void Configure(EntityTypeBuilder<SysEvent> builder)
     {
 
     }

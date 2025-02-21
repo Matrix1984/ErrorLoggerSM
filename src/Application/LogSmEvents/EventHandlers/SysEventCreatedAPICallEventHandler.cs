@@ -1,13 +1,13 @@
-﻿using ErrorLoggerSM.Domain.Events.SysErrorEvents;
+﻿using ErrorLoggerSM.Application.SysErrors.EventHandlers;
+using ErrorLoggerSM.Domain.Events.SysErrorEvents;
 using Microsoft.Extensions.Logging;
 
-namespace ErrorLoggerSM.Application.SysErrors.EventHandlers;
-
-public class SysErrorCreatedAPICallEventHandler : INotificationHandler<SysErrorCreatedAPICallEvent>
+namespace ErrorLoggerSM.Application.LogSmEvents.EventHandlers;
+public class SysEventCreatedAPICallEventHandler : INotificationHandler<SysErrorCreatedAPICallEvent>
 {
     private readonly ILogger<SysErrorCreatedAPIEmailHandler> _logger;
 
-    public SysErrorCreatedAPICallEventHandler(ILogger<SysErrorCreatedAPIEmailHandler> logger)
+    public SysEventCreatedAPICallEventHandler(ILogger<SysErrorCreatedAPIEmailHandler> logger)
     {
         _logger = logger;
     }
@@ -18,4 +18,4 @@ public class SysErrorCreatedAPICallEventHandler : INotificationHandler<SysErrorC
 
         return Task.CompletedTask;
     }
-}
+} 

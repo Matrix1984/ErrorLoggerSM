@@ -1,10 +1,10 @@
 ﻿using ErrorLoggerSM.Application.Common.Interfaces;
+using ErrorLoggerSM.Application.SysErrors.Commands.CreateSysError;
 using ErrorLoggerSM.Domain.Entities;
-using ErrorLoggerSM.Domain.Events.SysErrorEvents;
+using ErrorLoggerSM.Domain.Events.SysEventEvents;
 
-namespace ErrorLoggerSM.Application.SysErrors.Commands.CreateSysError;
-
-public record CreateSysErrorCommand : IRequest<int>
+namespace ErrorLoggerSM.Application.LogSmEvents.Commands;
+public class CreateLogSmEventCommand : IRequest<int>
 {
     public int? TargetHttpErrorCode { get; set; }
     public string? TargetAppErrorCode { get; set; }
@@ -30,7 +30,7 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorComman
 
     public async Task<int> Handle(CreateSysErrorCommand request, CancellationToken cancellationToken)
     {
-        var entity = new SysError();
+        var entity = new SysEvent();
 
         entity.TargetHttpErrorCode = request.TargetHttpErrorCode;
 
@@ -54,13 +54,13 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorComman
             foreach (var item in request.PostErrorActions)
             {
                 if (item == 0)
-                    entity.AddDomainEvent(new SysErrorCreatedAPIEmailEvent(entity));
+                    entity.AddDomainEvent(new SysEventCreatedAPIEmailEvent(entity));
 
                 if (item == 1)
-                    entity.AddDomainEvent(new SysErrorCreatedEvent(entity));
+                    entity.AddDomainEvent(new SysEventCreatedEvent(entity));
 
                 if (item == 2)
-                    entity.AddDomainEvent(new SysErrorCreatedAPICallEvent(entity));
+                    entity.AddDomainEvent(new SysEventCreatedEvent(entity));
             }
 
         if (request.ErrorTagIds != null)
@@ -68,7 +68,7 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorComman
                                       join d in request.ErrorTagIds on c.Id equals d
                                       select c).ToListAsync(cancellationToken);
 
-        _context.SysErrors.Add(entity);
+        _context.SysEvents.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

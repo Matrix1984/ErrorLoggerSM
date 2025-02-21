@@ -25,8 +25,10 @@ public interface IApplicationDbContext
 
      DbSet<SysError> SysErrors { get; }
 
-     DbSet<TargetApp> TargetApps { get; }
+    DbSet<SysEvent> SysEvents { get; }
+    DbSet<TargetApp> TargetApps { get; }
 
      DbSet<TargetSystem> TargetSystems { get; }
+     
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

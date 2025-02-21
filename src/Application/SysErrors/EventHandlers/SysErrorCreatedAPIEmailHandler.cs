@@ -1,4 +1,4 @@
-﻿using ErrorLoggerSM.Domain.Events;
+﻿using ErrorLoggerSM.Domain.Events.SysErrorEvents;
 using Microsoft.Extensions.Logging;
 
 namespace ErrorLoggerSM.Application.SysErrors.EventHandlers;

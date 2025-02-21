@@ -1,33 +1,33 @@
 ﻿using ErrorLoggerSM.Application.Common.Models;
-using ErrorLoggerSM.Application.SysErrors.Commands.CreateSysError;
-using ErrorLoggerSM.Application.SysErrors.Querries;
+using ErrorLoggerSM.Application.LogSmEvents.Commands;
+using ErrorLoggerSM.Application.LogSmEvents.Queries;
 using ErrorLoggerSM.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ErrorLoggerSM.Web.Endpoints;
- 
-public class SysErrors : EndpointGroupBase
+
+public class LogSmEvents : EndpointGroupBase
 {
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
             .RequireAuthorization()
-            .MapGet(GetSysErrorsWithPagination)
-            .MapPost(CreateSysError);
+            .MapGet(GetSysEventWithPagination)
+            .MapPost(CreateSysEvent);
     }
 
-    public async Task<Ok<PaginatedList<SysErrorBriefDto>>> GetSysErrorsWithPagination(ISender sender, [AsParameters] GetSysErrorsWithPaginationQuery query)
+    public async Task<Ok<PaginatedList<LogSMEventDto>>> GetSysEventWithPagination(ISender sender, [AsParameters] GetLogSmEventWithPaginationQuery query)
     {
         var result = await sender.Send(query);
 
         return TypedResults.Ok(result);
     }
 
-    public async Task<Created<int>> CreateSysError(ISender sender, CreateSysErrorCommand command)
+    public async Task<Created<int>> CreateSysEvent(ISender sender, CreateLogSmEventCommand command)
     {
         var id = await sender.Send(command);
 
         return TypedResults.Created($"/{nameof(SysEvent)}/{id}", id);
-    } 
+    }
 
 }

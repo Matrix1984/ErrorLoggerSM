@@ -1,4 +1,4 @@
-﻿namespace ErrorLoggerSM.Domain.Events;
+﻿namespace ErrorLoggerSM.Domain.Events.SysErrorEvents;
 public class SysErrorCreatedEvent : BaseEvent
 {
     public SysErrorCreatedEvent(SysError item)

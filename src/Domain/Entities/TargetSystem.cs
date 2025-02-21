@@ -5,7 +5,7 @@ public class TargetSystem : BaseEntity
 
     public ICollection<LogSmEvent>? LogSmEvents { get; set; }
 
-    public ICollection<SysError>? SysErrors { get; set; }
+    public ICollection<SysEvent>? SysErrors { get; set; }
 
     public bool IsDeleted { get; set; }
 }
