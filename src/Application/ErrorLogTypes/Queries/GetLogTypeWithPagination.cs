@@ -24,6 +24,7 @@ public class GetLogTypeWithPaginationQueryHandler : IRequestHandler<GetLogTypeWi
     public async Task<PaginatedList<ErrorLogTypeDto>> Handle(GetLogTypeWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.ErrorLogTypes
+            .Where(x=>!x.IsDeleted)
             .OrderBy(x => x.Id)
             .ProjectTo<ErrorLogTypeDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);

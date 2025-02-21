@@ -7,5 +7,6 @@ public class ErrorLogType : BaseEntity
 
     public string? Description { get; set; }
 
+    public bool IsDeleted { get; set; } 
     public SeverityLevel? SeverityLevel { get; set; }
 }

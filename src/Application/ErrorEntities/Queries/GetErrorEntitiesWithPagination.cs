@@ -23,6 +23,7 @@ public class GetErrorEntitiesWithPaginationQueryHandler : IRequestHandler<GetErr
     public async Task<PaginatedList<ErrorEntityDto>> Handle(GetErrorEntitiesWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.ErrorEntities
+            .Where(x => !x.IsDeleted)
             .OrderByDescending(x => x.Id)
             .ProjectTo<ErrorEntityDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);

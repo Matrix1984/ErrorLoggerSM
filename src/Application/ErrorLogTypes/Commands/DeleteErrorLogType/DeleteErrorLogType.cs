@@ -20,8 +20,8 @@ public class DeleteErrorLogTypeCommandHandler : IRequestHandler<DeleteErrorLogTy
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.ErrorLogTypes.Remove(entity);
+        entity.IsDeleted = true;
 
-        await _context.SaveChangesAsync(cancellationToken);
+         await _context.SaveChangesAsync(cancellationToken);
     }
 }
