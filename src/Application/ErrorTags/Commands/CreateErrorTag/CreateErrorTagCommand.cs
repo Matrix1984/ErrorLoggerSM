@@ -12,7 +12,7 @@ public record CreateErrorTagCommand : IRequest<int>
     public required string Name { get; init; }
     public string? Description { get; init; }
     public string? AppId { get; init; }
-    public List<string>? ErrorEntities { get; init; }
+    public List<int>? ErrorEntitiesIds { get; init; }
 }
 
 public class CreateErrorEntityHandler : IRequestHandler<CreateErrorTagCommand, int>
@@ -41,15 +41,12 @@ public class CreateErrorEntityHandler : IRequestHandler<CreateErrorTagCommand, i
 
         entity.Name = request.Name;
 
-        entity.Description = request.Description; 
+        entity.Description = request.Description;
 
-        entity.ErrorEntities = new List<ErrorEntity>();
-
-        if (request.ErrorEntities != null)
-            foreach (var item in request.ErrorEntities)
-            {
-                entity.ErrorEntities.Add(new ErrorEntity() { Name = item });
-            }
+        if (request.ErrorEntitiesIds != null)
+            entity.ErrorEntities = await (from c in _context.ErrorEntities
+                                          join d in request.ErrorEntitiesIds on c.Id equals d
+                                          select c).ToListAsync();
 
         _context.ErrorTags.Add(entity);
 
