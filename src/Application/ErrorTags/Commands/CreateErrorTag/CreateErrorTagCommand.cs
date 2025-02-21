@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ErrorLoggerSM.Application.Common.Interfaces;
+﻿using ErrorLoggerSM.Application.Common.Interfaces;
 using ErrorLoggerSM.Domain.Entities;
 
 namespace ErrorLoggerSM.Application.ErrorTags.Commands.CreateErrorTag;
@@ -46,7 +41,7 @@ public class CreateErrorEntityHandler : IRequestHandler<CreateErrorTagCommand, i
 
         entity.Name = request.Name;
 
-        entity.Description = request.Description; 
+        entity.Description = request.Description;
 
         entity.AppId = request.AppId;
 
