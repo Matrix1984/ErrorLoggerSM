@@ -20,7 +20,7 @@ public class DeleteTodoListCommandHandler : IRequestHandler<DeleteTargetSystemCo
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.TargetSystems.Remove(entity);
+        entity.IsDeleted = true;
 
         await _context.SaveChangesAsync(cancellationToken);
     }
