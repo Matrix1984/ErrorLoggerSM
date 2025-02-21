@@ -3,7 +3,6 @@ using ErrorLoggerSM.Application.SeverityLevels.Commands.CreateSeverityLevel;
 using ErrorLoggerSM.Application.SeverityLevels.Commands.DeleteSeverityLevel;
 using ErrorLoggerSM.Application.SeverityLevels.Commands.UpdateSeverityLevel;
 using ErrorLoggerSM.Application.SeverityLevels.Query;
-using ErrorLoggerSM.Application.SysErrors.Querries;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace ErrorLoggerSM.Web.Endpoints;
