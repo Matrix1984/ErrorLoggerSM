@@ -5,6 +5,8 @@ namespace ErrorLoggerSM.Application.Comments.Commands.CreateComment;
 public record CreateCommentCommand : IRequest<int>
 {
     public required string Description { get; set; }
+
+    public int SysErrorId { get; set; }
 }
 
 public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, int>
@@ -20,7 +22,8 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
     {
         var entity = new Comment
         {
-            Description = request.Description
+            Description = request.Description,
+            SysErrorId = request.SysErrorId
         };
 
         _context.ErrorComments.Add(entity);

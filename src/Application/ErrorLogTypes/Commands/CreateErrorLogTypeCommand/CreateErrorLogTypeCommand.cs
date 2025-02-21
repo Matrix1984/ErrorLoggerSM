@@ -9,7 +9,7 @@ public record CreateErrorLogTypeCommand : IRequest<int>
 
     public string? Description { get; init; }
 
-    public CreateSeverityLevelDto SeverityLevel { get; init; } = null!;
+    public CreateSeverityLevelCommand SeverityLevel { get; init; } = null!;
 }
 
 public class CreateErrorLogTypeCommandHandler : IRequestHandler<CreateErrorLogTypeCommand, int>

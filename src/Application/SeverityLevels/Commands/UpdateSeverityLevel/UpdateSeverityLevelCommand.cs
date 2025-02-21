@@ -5,9 +5,9 @@ namespace ErrorLoggerSM.Application.SeverityLevels.Commands.UpdateSeverityLevel;
 public record UpdateSeverityLevelCommand : IRequest
 {
     public int Id { get; init; }
-    public string? Name { get; init; }
+    public required string Name { get; init; }
 
-    public string? Level { get; init; }
+    public required string Level { get; init; }
 }
 
 public class UpdateSeverityLevelCommandHandler : IRequestHandler<UpdateSeverityLevelCommand>

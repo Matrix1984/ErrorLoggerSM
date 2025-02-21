@@ -1,5 +1,5 @@
 ﻿using ErrorLoggerSM.Application.Common.Interfaces;
-using ErrorLoggerSM.Application.SeverityLevels.Commands.CreateSeverityLevel;
+using ErrorLoggerSM.Application.SeverityLevels.Commands.UpdateSeverityLevel;
 
 namespace ErrorLoggerSM.Application.ErrorLogTypes.Commands.UpdateErrorLogType;
 public class UpdateErrorLogTypeCommand : IRequest
@@ -9,7 +9,7 @@ public class UpdateErrorLogTypeCommand : IRequest
 
     public string? Description { get; init; }
 
-    public CreateSeverityLevelDto SeverityLevel { get; init; } = null!;
+    public UpdateSeverityLevelCommand SeverityLevel { get; init; } = null!;
 }
 
 public class UpdateErrorLogTypeCommandHandler : IRequestHandler<UpdateErrorLogTypeCommand>
