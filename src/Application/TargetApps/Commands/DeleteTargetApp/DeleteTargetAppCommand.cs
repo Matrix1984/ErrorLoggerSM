@@ -21,7 +21,7 @@ public class DeleteTodoListCommandHandler : IRequestHandler<DeleteTargetAppComma
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.TargetApps.Remove(entity);
+        entity.IsDeleted = true;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

@@ -23,7 +23,8 @@ public class GetTargetAppWithPaginationQueryHandler : IRequestHandler<GetTargetA
     public async Task<PaginatedList<TargetAppDto>> Handle(GetTargetAppWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.TargetApps
-            .OrderBy(x => x.Id)
+            .Where(x=>!x.IsDeleted)
+            .OrderByDescending(x => x.Id)
             .ProjectTo<TargetAppDto>(_mapper.ConfigurationProvider)
             .PaginatedListAsync(request.PageNumber, request.PageSize);
     }
