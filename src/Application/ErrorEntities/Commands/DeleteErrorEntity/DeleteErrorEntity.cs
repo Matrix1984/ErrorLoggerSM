@@ -21,7 +21,7 @@ public class DeleteErrorEntityCommandHandler : IRequestHandler<DeleteErrorEntity
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.ErrorEntities.Remove(entity);
+        entity.IsDeleted = true; 
 
         await _context.SaveChangesAsync(cancellationToken);
     }
