@@ -1,5 +1,4 @@
 ﻿using ErrorLoggerSM.Application.Common.Interfaces;
-using ErrorLoggerSM.Application.SeverityLevels.Commands.CreateSeverityLevel;
 using ErrorLoggerSM.Domain.Entities;
 
 namespace ErrorLoggerSM.Application.ErrorLogTypes.Commands.CreateErrorLogTypeCommand;
@@ -9,7 +8,7 @@ public record CreateErrorLogTypeCommand : IRequest<int>
 
     public string? Description { get; init; }
 
-    public CreateSeverityLevelCommand SeverityLevel { get; init; } = null!;
+    public int? SeverityLevelId { get; init; }
 }
 
 public class CreateErrorLogTypeCommandHandler : IRequestHandler<CreateErrorLogTypeCommand, int>
@@ -30,15 +29,7 @@ public class CreateErrorLogTypeCommandHandler : IRequestHandler<CreateErrorLogTy
 
         entity.Description = request.Description;
 
-
-        if (request.SeverityLevel != null)
-        {
-            entity.SeverityLevel = new SeverityLevel()
-            {
-                Name = request.SeverityLevel.Name,
-                Level = request.SeverityLevel.Level
-            };
-        }
+        entity.SeverityLevelId = request.SeverityLevelId;
 
         _context.ErrorLogTypes.Add(entity);
 

@@ -22,6 +22,6 @@ public class DeleteErrorLogTypeCommandHandler : IRequestHandler<DeleteErrorLogTy
 
         entity.IsDeleted = true;
 
-         await _context.SaveChangesAsync(cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
     }
 }
