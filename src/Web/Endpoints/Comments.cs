@@ -16,7 +16,7 @@ public class Comments : EndpointGroupBase
             .MapGet(GetCommentsWithPagination)
             .MapPost(CreateErrorComment)
             .MapPut(UpdateTodoItem, "{id}") 
-            .MapDelete(DeleteTodoItem, "{id}");
+            .MapDelete(DeleteComment, "{id}");
     }
 
     public async Task<Ok<PaginatedList<CommentDto>>> GetCommentsWithPagination(ISender sender, [AsParameters] GetCommentQueryWithPaginationQuery query)
@@ -42,7 +42,7 @@ public class Comments : EndpointGroupBase
         return TypedResults.NoContent();
     } 
 
-    public async Task<NoContent> DeleteTodoItem(ISender sender, int id)
+    public async Task<NoContent> DeleteComment(ISender sender, int id)
     {
         await sender.Send(new DeleteCommentCommand(id));
 
