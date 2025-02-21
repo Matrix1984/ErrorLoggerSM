@@ -1,5 +1,5 @@
 ﻿using ErrorLoggerSM.Application.Common.Interfaces;
-using ErrorLoggerSM.Application.SeverityLevels.Commands;
+using ErrorLoggerSM.Application.SeverityLevels.Commands.CreateSeverityLevel;
 
 namespace ErrorLoggerSM.Application.ErrorLogTypes.Commands.UpdateErrorLogType;
 public class UpdateErrorLogTypeCommand : IRequest

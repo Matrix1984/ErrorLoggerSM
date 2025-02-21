@@ -1,5 +1,5 @@
 ﻿using ErrorLoggerSM.Application.Common.Interfaces;
-using ErrorLoggerSM.Application.SeverityLevels.Commands;
+using ErrorLoggerSM.Application.SeverityLevels.Commands.CreateSeverityLevel;
 using ErrorLoggerSM.Domain.Entities;
 
 namespace ErrorLoggerSM.Application.ErrorLogTypes.Commands.CreateErrorLogTypeCommand;
