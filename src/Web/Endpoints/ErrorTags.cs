@@ -5,8 +5,7 @@ using ErrorLoggerSM.Application.ErrorTags.Commands.UpdateErrorTag;
 using ErrorLoggerSM.Application.ErrorTags.Queries;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace ErrorLoggerSM.Web.Endpoints;
-
+namespace ErrorLoggerSM.Web.Endpoints; 
 
 public class ErrorTags : EndpointGroupBase
 {
@@ -16,8 +15,8 @@ public class ErrorTags : EndpointGroupBase
             .RequireAuthorization()
             .MapGet(GetErrorTagsWithPagination)
             .MapPost(CreateErrorComment)
-            .MapPut(UpdateTodoItem, "{id}")
-            .MapDelete(DeleteTodoItem, "{id}");
+            .MapPut(UpdateErrorTag, "{id}")
+            .MapDelete(DeleteErrorTag, "{id}");
     }
 
     public async Task<Ok<PaginatedList<ErrorTagVM>>> GetErrorTagsWithPagination(ISender sender, [AsParameters] GetErrorTagsWithPaginationQuery query)
@@ -34,7 +33,7 @@ public class ErrorTags : EndpointGroupBase
         return TypedResults.Created($"/{nameof(ErrorTags)}/{id}", id);
     }
 
-    public async Task<Results<NoContent, BadRequest>> UpdateTodoItem(ISender sender, int id, UpdateErrorTagCommand command)
+    public async Task<Results<NoContent, BadRequest>> UpdateErrorTag(ISender sender, int id, UpdateErrorTagCommand command)
     {
         if (id != command.Id) return TypedResults.BadRequest();
 
@@ -43,7 +42,7 @@ public class ErrorTags : EndpointGroupBase
         return TypedResults.NoContent();
     }
 
-    public async Task<NoContent> DeleteTodoItem(ISender sender, int id)
+    public async Task<NoContent> DeleteErrorTag(ISender sender, int id)
     {
         await sender.Send(new DeleteErrorTagCommand(id));
 

@@ -15,8 +15,8 @@ public class TargetApps : EndpointGroupBase
             .RequireAuthorization()
             .MapGet(GetTargetAppsWithPagination)
             .MapPost(CreateErrorComment)
-            .MapPut(UpdateTodoItem, "{id}")
-            .MapDelete(DeleteTodoItem, "{id}");
+            .MapPut(UpdateTargetApp, "{id}")
+            .MapDelete(DeleteTargetApp, "{id}");
     }
 
     public async Task<Ok<PaginatedList<TargetAppDto>>> GetTargetAppsWithPagination(ISender sender, [AsParameters] GetTargetAppWithPaginationQuery query)
@@ -33,7 +33,7 @@ public class TargetApps : EndpointGroupBase
         return TypedResults.Created($"/{nameof(TargetApps)}/{id}", id);
     }
 
-    public async Task<Results<NoContent, BadRequest>> UpdateTodoItem(ISender sender, int id, UpdateTargetAppCommand command)
+    public async Task<Results<NoContent, BadRequest>> UpdateTargetApp(ISender sender, int id, UpdateTargetAppCommand command)
     {
         if (id != command.Id) return TypedResults.BadRequest();
 
@@ -42,7 +42,7 @@ public class TargetApps : EndpointGroupBase
         return TypedResults.NoContent();
     }
 
-    public async Task<NoContent> DeleteTodoItem(ISender sender, int id)
+    public async Task<NoContent> DeleteTargetApp(ISender sender, int id)
     {
         await sender.Send(new DeleteTargetAppCommand(id));
 

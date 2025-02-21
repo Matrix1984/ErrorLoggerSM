@@ -15,9 +15,9 @@ public class ErrorLogTypes : EndpointGroupBase
         app.MapGroup(this)
             .RequireAuthorization()
             .MapGet(GetErrorLogsWithPagination)
-            .MapPost(CreateErrorErrorLog)
-            .MapPut(UpdateTodoItem, "{id}")
-            .MapDelete(DeleteTodoItem, "{id}");
+            .MapPost(CreateErrorLog)
+            .MapPut(UpdateLogType, "{id}")
+            .MapDelete(DeleteLogType, "{id}");
     }
 
     public async Task<Ok<PaginatedList<ErrorLogTypeDto>>> GetErrorLogsWithPagination(ISender sender, [AsParameters] GetLogTypeWithPaginationQuery query)
@@ -27,14 +27,14 @@ public class ErrorLogTypes : EndpointGroupBase
         return TypedResults.Ok(result);
     }
 
-    public async Task<Created<int>> CreateErrorErrorLog(ISender sender, CreateErrorLogTypeCommand command)
+    public async Task<Created<int>> CreateErrorLog(ISender sender, CreateErrorLogTypeCommand command)
     {
         var id = await sender.Send(command);
 
         return TypedResults.Created($"/{nameof(ErrorLogType)}/{id}", id);
     }
 
-    public async Task<Results<NoContent, BadRequest>> UpdateTodoItem(ISender sender, int id, UpdateTargetSystemCommand command)
+    public async Task<Results<NoContent, BadRequest>> UpdateLogType(ISender sender, int id, UpdateTargetSystemCommand command)
     {
         if (id != command.Id) return TypedResults.BadRequest();
 
@@ -43,7 +43,7 @@ public class ErrorLogTypes : EndpointGroupBase
         return TypedResults.NoContent();
     }
 
-    public async Task<NoContent> DeleteTodoItem(ISender sender, int id)
+    public async Task<NoContent> DeleteLogType(ISender sender, int id)
     {
         await sender.Send(new DeleteErrorLogTypeCommand(id));
 
