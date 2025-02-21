@@ -1,8 +1,4 @@
-﻿using ErrorLoggerSM.Application.Comments.Commands.CreateComment;
-using ErrorLoggerSM.Application.Comments.Commands.DeleteComment;
-using ErrorLoggerSM.Application.Comments.Commands.UpdateComment;
-using ErrorLoggerSM.Application.Comments.Queries;
-using ErrorLoggerSM.Application.Common.Models;
+﻿using ErrorLoggerSM.Application.Common.Models;
 using ErrorLoggerSM.Application.ErrorEntities.Commands.CreateErrorEntity;
 using ErrorLoggerSM.Application.ErrorEntities.Commands.DeleteErrorEntity;
 using ErrorLoggerSM.Application.ErrorEntities.Commands.UpdateErrorEntity;
@@ -10,7 +6,7 @@ using ErrorLoggerSM.Application.ErrorEntities.Queries;
 using ErrorLoggerSM.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 
-namespace ErrorLoggerSM.Web.Endpoints; 
+namespace ErrorLoggerSM.Web.Endpoints;
 
 public class ErrorEntities : EndpointGroupBase
 {
