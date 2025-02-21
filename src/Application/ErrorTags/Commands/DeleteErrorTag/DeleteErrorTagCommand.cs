@@ -20,7 +20,7 @@ public class DeleteErrorTagCommandHandler : IRequestHandler<DeleteErrorTagComman
 
         Guard.Against.NotFound(request.Id, entity);
 
-        _context.ErrorTags.Remove(entity);
+        entity.IsDeleted = true;
 
         await _context.SaveChangesAsync(cancellationToken);
     }

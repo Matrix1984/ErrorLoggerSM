@@ -24,6 +24,7 @@ public class GetErrorTagsWithPaginationQueryHandler : IRequestHandler<GetErrorTa
     public async Task<PaginatedList<ErrorTagVM>> Handle(GetErrorTagsWithPaginationQuery request, CancellationToken cancellationToken)
     {
         return await _context.ErrorTags
+               .Where(x=>!x.IsDeleted)
                .OrderBy(x => x.Id)
                .ProjectTo<ErrorTagVM>(_mapper.ConfigurationProvider)
                .PaginatedListAsync(request.PageNumber, request.PageSize);

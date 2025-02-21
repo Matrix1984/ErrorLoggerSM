@@ -41,9 +41,7 @@ public class CreateErrorEntityHandler : IRequestHandler<CreateErrorTagCommand, i
 
         entity.Name = request.Name;
 
-        entity.Description = request.Description;
-
-        entity.AppId = request.AppId;
+        entity.Description = request.Description; 
 
         entity.ErrorEntities = new List<ErrorEntity>();
 

@@ -12,7 +12,7 @@ public class ErrorTag : BaseEntity
     public int? TargetSystemId { get; set; }
     public TargetSystem? TargetSystem { get; set; } 
     public required string Name { get; set; }
-    public string? Description { get; set; }  
-    public string? AppId { get; set; } 
+    public string? Description { get; set; }   
+    public bool IsDeleted { get; set; }
     public List<ErrorEntity>? ErrorEntities { get; set; } // User, manager, operator who caused the action to create the error.
 }

@@ -6,8 +6,6 @@ namespace ErrorLoggerSM.Infrastructure.Data.Configurations;
 public class ErrorTagConfiguration : IEntityTypeConfiguration<ErrorTag>
 {
     public void Configure(EntityTypeBuilder<ErrorTag> builder)
-    {
-        builder.Property(t => t.AppId)
-        .HasMaxLength(100);
+    { 
     }
 }
