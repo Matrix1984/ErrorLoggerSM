@@ -77,10 +77,7 @@ public class GetSysErrorsWithPaginationQueryHandler : IRequestHandler<GetSysErro
                 sysErrorsQuery.OrderByDescending(x => x.ErrorLogTypeId);
 
             if (request.SortyBy == "ErrorGeneratedDateTime")
-                sysErrorsQuery.OrderByDescending(x => x.ErrorGeneratedDateTime);
-
-            if (request.SortyBy == "AppId")
-                sysErrorsQuery.OrderByDescending(x => x.AppId);
+                sysErrorsQuery.OrderByDescending(x => x.ErrorGeneratedDateTime); 
 
             if (request.SortyBy == "TargetSystemId")
                 sysErrorsQuery.OrderByDescending(x => x.TargetSystemId);
@@ -103,10 +100,7 @@ public class GetSysErrorsWithPaginationQueryHandler : IRequestHandler<GetSysErro
                 sysErrorsQuery.OrderBy(x => x.ErrorLogTypeId);
 
             if (request.SortyBy == "ErrorGeneratedDateTime")
-                sysErrorsQuery.OrderBy(x => x.ErrorGeneratedDateTime);
-
-            if (request.SortyBy == "AppId")
-                sysErrorsQuery.OrderBy(x => x.AppId);
+                sysErrorsQuery.OrderBy(x => x.ErrorGeneratedDateTime); 
 
             if (request.SortyBy == "TargetSystemId")
                 sysErrorsQuery.OrderBy(x => x.TargetSystemId);
@@ -124,9 +118,7 @@ public class GetSysErrorsWithPaginationQueryHandler : IRequestHandler<GetSysErro
                           ErrorGeneratedDateTime = n.ErrorGeneratedDateTime,
                           TargetAppName = n.TargetApp != null ? n.TargetApp.Name ?? String.Empty : String.Empty,
                           TargetSystemName = n.TargetSystem != null ? n.TargetSystem.Name ?? String.Empty : String.Empty,
-                      });
-         
-           
+                      }); 
 
         return await query2.PaginatedListAsync(request.PageNumber, request.PageSize);
 

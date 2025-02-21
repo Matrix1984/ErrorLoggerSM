@@ -11,9 +11,8 @@ public record CreateSysErrorCommand : IRequest<int>
     public string? TargetShortDescription { get; set; }
     public string? TargetLongDescription { get; set; }
     public string? TargetTechnicalDescription { get; set; }
-    public string? AppId { get; set; }
     public int? ErrorLogTypeId { get; set; }
-    public ICollection<string>? ErrorTags { get; set; }
+    public ICollection<int>? ErrorTagIds { get; set; }
     public DateTimeOffset? ErrorGeneratedDateTime { get; set; }
     public ICollection<int>? PostErrorActions { get; set; }
     public int? TargetAppId { get; set; }
@@ -43,8 +42,6 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorComman
 
         entity.TargetTechnicalDescription = request.TargetTechnicalDescription;
 
-        entity.AppId = request.AppId;
-
         entity.ErrorLogTypeId = request.ErrorLogTypeId;
 
         entity.ErrorGeneratedDateTime = request.ErrorGeneratedDateTime;
@@ -66,8 +63,10 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorComman
                     entity.AddDomainEvent(new SysErrorCreatedAPICallEvent(entity));
             }
 
-        if (request.ErrorTags != null)
-            entity.ErrorTags = await _context.ErrorTags.Where(s => request.ErrorTags.Contains(s.Name)).ToListAsync(cancellationToken);
+        if (request.ErrorTagIds != null)
+            entity.ErrorTags = await (from c in _context.ErrorTags
+                                      join d in request.ErrorTagIds on c.Id equals d
+                                      select c).ToListAsync(cancellationToken);
 
         _context.SysErrors.Add(entity);
 

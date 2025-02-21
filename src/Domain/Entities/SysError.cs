@@ -10,8 +10,7 @@ public class SysError : BaseAuditableEntity
     public string? TargetLongDescription { get; set; } // Exception description.
     public string? TargetTechnicalDescription { get; set; }
 
-    //Error Identifiers 
-    public string? AppId { get; set; }
+    //Error Identifiers  
     public ICollection<ErrorTag>? ErrorTags { get; set; }
 
     //Log Type
