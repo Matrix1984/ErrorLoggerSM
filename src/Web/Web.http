@@ -9,6 +9,7 @@ GET {{Web_HostAddress}}/Identity/Account/Login
 
 ###
 
+# @name login
 # POST Identity Account Login
 # Get the @AuthCookieValue necessary for authenticating requests.
 @Email=administrator@localhost
@@ -19,68 +20,19 @@ Content-Type: application/x-www-form-urlencoded
 
 Input.Email={{Email}}&Input.Password={{Password}}&__RequestVerificationToken={{RequestVerificationToken}}
 
-###
+### 
 
-# GET WeatherForecast
-GET {{Web_HostAddress}}/api/WeatherForecasts
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
-
-###
-
-# GET TodoLists
-GET {{Web_HostAddress}}/api/TodoLists
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
-
-###
-
-#GET TodoList
-GET {{Web_HostAddress}}/api/TodoLists/1
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
-
-###
-
-# POST TodoLists
-POST {{Web_HostAddress}}/api/TodoLists
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
-Content-Type: application/json
-
-// CreateTodoListCommand
-{
-  "Title": "Backlog"
-}
-
-###
-
-# PUT TodoLists
-PUT {{Web_HostAddress}}/api/TodoLists/1
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
-Content-Type: application/json
-
-// UpdateTodoListCommand
-{
-  "Id": 1,
-  "Title": "Product Backlog"
-}
-
-###
-
-# DELETE TodoLists
-DELETE {{Web_HostAddress}}/api/TodoLists/1
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
-
-###
-
-# GET TodoItems
+# GET Comments
 @PageNumber = 1
 @PageSize = 10
-GET {{Web_HostAddress}}/api/TodoItems?ListId=1&PageNumber={{PageNumber}}&PageSize={{PageSize}}
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+GET {{Web_HostAddress}}/api/Comments?SysErrorId=1&PageNumber={{PageNumber}}&PageSize={{PageSize}}
+Authorization: Bearer {{login.response.body.$.token}}
 
 ###
 
 # POST TodoItems
-POST {{Web_HostAddress}}/api/TodoItems
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+POST {{Web_HostAddress}}/api/Comments
+Authorization: Bearer {{login.response.body.$.token}}
 Content-Type: application/json
 
 // CreateTodoItemCommand
@@ -92,8 +44,8 @@ Content-Type: application/json
 ###
 
 #PUT TodoItems UpdateItemDetails
-PUT {{Web_HostAddress}}/api/TodoItems/UpdateItemDetails?Id=1
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+PUT {{Web_HostAddress}}/api/Comments/UpdateItemDetails?Id=1
+Authorization: Bearer {{login.response.body.$.token}}
 Content-Type: application/json
 
 // UpdateTodoItemDetailCommand
@@ -107,8 +59,8 @@ Content-Type: application/json
 ###
 
 # PUT TodoItems
-PUT {{Web_HostAddress}}/api/TodoItems/1
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+PUT {{Web_HostAddress}}/api/Comments/1
+Authorization: Bearer {{login.response.body.$.token}}
 Content-Type: application/json
 
 // UpdateTodoItemCommand
@@ -121,7 +73,7 @@ Content-Type: application/json
 ###
 
 # DELETE TodoItem
-DELETE {{Web_HostAddress}}/api/TodoItems/1
-Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+DELETE {{Web_HostAddress}}/api/Comments/1
+Authorization: Bearer {{login.response.body.$.token}}
 
 ###
