@@ -21,13 +21,21 @@ public class IdentityService : IIdentityService
         _userClaimsPrincipalFactory = userClaimsPrincipalFactory;
         _authorizationService = authorizationService;
     }
-
+     
     public async Task<string?> GetUserNameAsync(string userId)
     {
-        var user = await _userManager.FindByIdAsync(userId);
+        var user = await _userManager.FindByIdAsync(userId); 
 
         return user?.UserName;
     }
+
+    public async Task<ApplicationUser?> GetUser(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        return user;
+    }
+
 
     public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
     {

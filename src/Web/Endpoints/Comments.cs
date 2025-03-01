@@ -2,6 +2,7 @@
 using ErrorLoggerSM.Application.Comments.Commands.DeleteComment;
 using ErrorLoggerSM.Application.Comments.Commands.UpdateComment;
 using ErrorLoggerSM.Application.Comments.Queries;
+using ErrorLoggerSM.Application.Common.Interfaces;
 using ErrorLoggerSM.Application.Common.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -9,6 +10,8 @@ namespace ErrorLoggerSM.Web.Endpoints;
 
 public class Comments : EndpointGroupBase
 {
+  
+    
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
