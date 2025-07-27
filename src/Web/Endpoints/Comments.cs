@@ -9,9 +9,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 namespace ErrorLoggerSM.Web.Endpoints;
 
 public class Comments : EndpointGroupBase
-{
-  
-    
+{ 
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)

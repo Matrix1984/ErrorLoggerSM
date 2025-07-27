@@ -2,28 +2,28 @@
 using ErrorLoggerSM.Domain.Entities;
 
 namespace ErrorLoggerSM.Application.TargetApps.Commands.CreateTargetApp;
-public record CreateTargetSystemCommand : IRequest<int>
+public record CreateTargetAppCommand : IRequest<int>
 {
     public required string Name { get; set; }
 }
 
-public class CreateTargetSystemCommandHandler : IRequestHandler<CreateTargetSystemCommand, int>
+public class CreateTargetAppCommandHandler : IRequestHandler<CreateTargetAppCommand, int>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateTargetSystemCommandHandler(IApplicationDbContext context)
+    public CreateTargetAppCommandHandler(IApplicationDbContext context)
     {
         _context = context;
     }
 
-    public async Task<int> Handle(CreateTargetSystemCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateTargetAppCommand request, CancellationToken cancellationToken)
     {
-        var entity = new TargetSystem
+        var entity = new TargetApp
         {
             Name = request.Name
         };
 
-        _context.TargetSystems.Add(entity);
+        _context.TargetApps.Add(entity);
 
         await _context.SaveChangesAsync(cancellationToken);
 

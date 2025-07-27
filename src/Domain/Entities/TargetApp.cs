@@ -2,7 +2,8 @@
 public class TargetApp : BaseEntity
 {
     public required string Name { get; set; } 
-    public ICollection<LogSmEvent>? LogSmEvents { get; set; } 
-    public ICollection<SysEvent>? SysErrors { get; set; } 
+
     public bool IsDeleted { get; set; }
+
+    public ICollection<SysError>? SysErrors { get; set; }
 }

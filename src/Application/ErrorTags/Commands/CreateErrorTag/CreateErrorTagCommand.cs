@@ -30,23 +30,10 @@ public class CreateErrorEntityHandler : IRequestHandler<CreateErrorTagCommand, i
         {
             Name = request.Name
         };
-
-        entity.SeverityLevelId = request.SeverityLevelId;
-
-        entity.ErrorLogTypeId = request.ErrorLogTypeId;
-
-        entity.TargetAppId = request.TargetAppId;
-
-        entity.TargetSystemId = request.TargetSystemId;
-
+          
         entity.Name = request.Name;
 
-        entity.Description = request.Description;
-
-        if (request.ErrorEntitiesIds != null)
-            entity.ErrorEntities = await (from c in _context.ErrorEntities
-                                          join d in request.ErrorEntitiesIds on c.Id equals d
-                                          select c).ToListAsync();
+        entity.Description = request.Description; 
 
         _context.ErrorTags.Add(entity);
 

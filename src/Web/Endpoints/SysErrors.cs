@@ -27,7 +27,7 @@ public class SysErrors : EndpointGroupBase
     {
         var id = await sender.Send(command);
 
-        return TypedResults.Created($"/{nameof(SysEvent)}/{id}", id);
+        return TypedResults.Created($"/{nameof(SysError)}/{id}", id);
     } 
 
 }

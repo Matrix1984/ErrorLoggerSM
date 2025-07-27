@@ -26,7 +26,7 @@ public class TargetApps : EndpointGroupBase
         return TypedResults.Ok(result);
     }
 
-    public async Task<Created<int>> CreateErrorComment(ISender sender, CreateTargetSystemCommand command)
+    public async Task<Created<int>> CreateErrorComment(ISender sender, CreateTargetAppCommand command)
     {
         var id = await sender.Send(command);
 

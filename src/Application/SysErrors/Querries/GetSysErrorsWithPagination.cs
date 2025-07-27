@@ -48,16 +48,7 @@ public class GetSysErrorsWithPaginationQueryHandler : IRequestHandler<GetSysErro
             sysErrorsQuery.Where(x => x.TargetShortDescription == request.TargetShortDescription);
 
         if (request.TargetAppId > 0)
-            sysErrorsQuery.Where(x => x.TargetAppId == request.TargetAppId);
-
-        if (request.TargetSystemId > 0)
-            sysErrorsQuery.Where(x => x.TargetSystemId == request.TargetSystemId);
-
-        if (request.ErrorGeneratedDateTimeFrom!= null)
-            sysErrorsQuery.Where(x => x.ErrorGeneratedDateTime > request.ErrorGeneratedDateTimeFrom);
-
-        if (request.ErrorGeneratedDateTimeTo != null)
-            sysErrorsQuery.Where(x => x.ErrorGeneratedDateTime < request.ErrorGeneratedDateTimeTo);
+            sysErrorsQuery.Where(x => x.TargetAppId == request.TargetAppId); 
 
         if (request.OrderBy != "ASC")
         {
@@ -71,16 +62,7 @@ public class GetSysErrorsWithPaginationQueryHandler : IRequestHandler<GetSysErro
                 sysErrorsQuery.OrderByDescending(x => x.TargetAppErrorCode);
 
             if (request.SortyBy == "TargetShortDescription")
-                sysErrorsQuery.OrderByDescending(x => x.TargetShortDescription);
-
-            if (request.SortyBy == "ErrorLogTypeId")
-                sysErrorsQuery.OrderByDescending(x => x.ErrorLogTypeId);
-
-            if (request.SortyBy == "ErrorGeneratedDateTime")
-                sysErrorsQuery.OrderByDescending(x => x.ErrorGeneratedDateTime); 
-
-            if (request.SortyBy == "TargetSystemId")
-                sysErrorsQuery.OrderByDescending(x => x.TargetSystemId);
+                sysErrorsQuery.OrderByDescending(x => x.TargetShortDescription); 
         }
         else
         {
@@ -95,29 +77,17 @@ public class GetSysErrorsWithPaginationQueryHandler : IRequestHandler<GetSysErro
 
             if (request.SortyBy == "TargetShortDescription")
                 sysErrorsQuery.OrderBy(x => x.TargetShortDescription);
-
-            if (request.SortyBy == "ErrorLogTypeId")
-                sysErrorsQuery.OrderBy(x => x.ErrorLogTypeId);
-
-            if (request.SortyBy == "ErrorGeneratedDateTime")
-                sysErrorsQuery.OrderBy(x => x.ErrorGeneratedDateTime); 
-
-            if (request.SortyBy == "TargetSystemId")
-                sysErrorsQuery.OrderBy(x => x.TargetSystemId);
+ 
         }
 
         var query2 = (from n in
                               sysErrorsQuery
                       select new SysErrorBriefDto
-                      {
-                          Id = n.Id,
+                      { 
                           TargetHttpErrorCode = n.TargetHttpErrorCode,
                           TargetAppErrorCode = n.TargetAppErrorCode,
-                          TargetShortDescription = n.TargetShortDescription,
-                          ErrorLogTypeName = n.ErrorLogType != null ? n.ErrorLogType.Name ?? String.Empty : String.Empty,
-                          ErrorGeneratedDateTime = n.ErrorGeneratedDateTime,
-                          TargetAppName = n.TargetApp != null ? n.TargetApp.Name ?? String.Empty : String.Empty,
-                          TargetSystemName = n.TargetSystem != null ? n.TargetSystem.Name ?? String.Empty : String.Empty,
+                          TargetShortDescription = n.TargetShortDescription, 
+                          TargetAppName = n.TargetApp != null ? n.TargetApp.Name ?? String.Empty : String.Empty, 
                       }); 
 
         return await query2.PaginatedListAsync(request.PageNumber, request.PageSize);

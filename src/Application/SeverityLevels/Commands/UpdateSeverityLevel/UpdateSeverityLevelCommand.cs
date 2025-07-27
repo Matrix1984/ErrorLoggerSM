@@ -27,9 +27,7 @@ public class UpdateSeverityLevelCommandHandler : IRequestHandler<UpdateSeverityL
 
         if (!String.IsNullOrEmpty(request.Name))
             entity.Name = request.Name;
-
-        if (!String.IsNullOrEmpty(request.Level))
-            entity.Level = request.Level;
+         
 
         await _context.SaveChangesAsync(cancellationToken);
     }

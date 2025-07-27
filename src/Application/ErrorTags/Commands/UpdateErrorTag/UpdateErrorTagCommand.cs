@@ -28,24 +28,11 @@ public class UpdateErrorLogTypeCommandHandler : IRequestHandler<UpdateErrorTagCo
         var entity = await _context.ErrorTags
             .FindAsync(new object[] { request.Id }, cancellationToken);
 
-        Guard.Against.NotFound(request.Id, entity);
-
-        entity.SeverityLevelId = request.SeverityLevelId;
-
-        entity.ErrorLogTypeId = request.ErrorLogTypeId;
-
-        entity.TargetAppId = request.TargetAppId;
-
-        entity.TargetSystemId = request.TargetSystemId;
+        Guard.Against.NotFound(request.Id, entity); 
 
         entity.Name = request.Name;
 
-        entity.Description = request.Description; 
-
-        if (request.ErrorEntitiesIds != null)
-            entity.ErrorEntities = await (from c in _context.ErrorEntities
-                                          join d in request.ErrorEntitiesIds on c.Id equals d
-                                          select c).ToListAsync();
+        entity.Description = request.Description;  
 
         await _context.SaveChangesAsync(cancellationToken);
     }

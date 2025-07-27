@@ -2,4 +2,7 @@
 public class Statistics : BaseEntity
 {
     public int SysErrorsCount { get; set; }
+
+
+    
 }

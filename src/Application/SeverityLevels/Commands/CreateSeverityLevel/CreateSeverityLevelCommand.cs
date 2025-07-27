@@ -24,7 +24,7 @@ public class CreateErrorEntityHandler : IRequestHandler<CreateSeverityLevelComma
         var entity = new SeverityLevel
         {
             Name = request.Name,
-            Level = request.Level
+            Level = 0
         };
 
         _context.SeverityLevels.Add(entity);

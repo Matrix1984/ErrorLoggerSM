@@ -40,15 +40,7 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorComman
 
         entity.TargetLongDescription = request.TargetLongDescription;
 
-        entity.TargetTechnicalDescription = request.TargetTechnicalDescription;
-
-        entity.ErrorLogTypeId = request.ErrorLogTypeId;
-
-        entity.ErrorGeneratedDateTime = request.ErrorGeneratedDateTime;
-
-        entity.TargetAppId = request.TargetAppId;
-
-        entity.TargetSystemId = request.TargetSystemId;
+        entity.TargetTechnicalDescription = request.TargetTechnicalDescription; 
 
         if (request.PostErrorActions != null)
             foreach (var item in request.PostErrorActions)
@@ -72,6 +64,6 @@ public class CreateTodoItemCommandHandler : IRequestHandler<CreateSysErrorComman
 
         await _context.SaveChangesAsync(cancellationToken);
 
-        return entity.Id;
+        return 0;
     }
 }

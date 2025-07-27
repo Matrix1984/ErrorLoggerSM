@@ -23,7 +23,8 @@ public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand,
         var entity = new Comment
         {
             Description = request.Description,
-            SysErrorId = request.SysErrorId
+            SysErrorId = request.SysErrorId,
+            Errror = new SysError()
         };
 
         _context.ErrorComments.Add(entity);
